@@ -2,8 +2,8 @@ package com.smughito.eventcorelib.integration;
 
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
-import net.luckperms.api.model.user.User;
 import net.luckperms.api.cacheddata.CachedMetaData;
+import net.luckperms.api.model.user.User;
 import org.bukkit.entity.Player;
 
 import java.util.Optional;
@@ -12,11 +12,7 @@ import java.util.UUID;
 public class LuckPermsIntegration {
 
     private LuckPerms luckPerms;
-    private boolean enabled;
-
-    public LuckPermsIntegration() {
-        this.enabled = false;
-    }
+    private boolean enabled = false;
 
     public void initialize() {
         try {
@@ -31,59 +27,43 @@ public class LuckPermsIntegration {
         return enabled;
     }
 
-    public String getPrefix(Player player) {
-        if (!enabled) {
-            return "";
-        }
+    /* ================= PREFIX ================= */
 
-        return getPrefix(player.getUniqueId()).orElse("");
+    public String getPrefix(Player player) {
+        return enabled ? getPrefix(player.getUniqueId()) : "";
     }
 
     public String getPrefix(UUID uuid) {
-        if (!enabled) {
-            return "";
-        }
-
         return getMetaData(uuid)
                 .map(CachedMetaData::getPrefix)
                 .orElse("");
     }
 
-    public String getSuffix(Player player) {
-        if (!enabled) {
-            return "";
-        }
+    public Optional<String> getPrefixOptional(UUID uuid) {
+        return enabled
+                ? getMetaData(uuid).map(CachedMetaData::getPrefix)
+                : Optional.empty();
+    }
 
-        return getSuffix(player.getUniqueId()).orElse("");
+    /* ================= SUFFIX ================= */
+
+    public String getSuffix(Player player) {
+        return enabled ? getSuffix(player.getUniqueId()) : "";
     }
 
     public String getSuffix(UUID uuid) {
-        if (!enabled) {
-            return "";
-        }
-
         return getMetaData(uuid)
                 .map(CachedMetaData::getSuffix)
                 .orElse("");
     }
 
-    public Optional<String> getPrefixOptional(UUID uuid) {
-        if (!enabled) {
-            return Optional.empty();
-        }
-
-        return getMetaData(uuid)
-                .map(CachedMetaData::getPrefix);
-    }
-
     public Optional<String> getSuffixOptional(UUID uuid) {
-        if (!enabled) {
-            return Optional.empty();
-        }
-
-        return getMetaData(uuid)
-                .map(CachedMetaData::getSuffix);
+        return enabled
+                ? getMetaData(uuid).map(CachedMetaData::getSuffix)
+                : Optional.empty();
     }
+
+    /* ================= METADATA ================= */
 
     private Optional<CachedMetaData> getMetaData(UUID uuid) {
         if (!enabled) {
@@ -98,30 +78,24 @@ public class LuckPermsIntegration {
         return Optional.of(user.getCachedData().getMetaData());
     }
 
-    public String mergePrefix(String teamPrefix, String luckPermsPrefix) {
-        if (teamPrefix == null) teamPrefix = "";
-        if (luckPermsPrefix == null) luckPermsPrefix = "";
+    /* ================= MERGE ================= */
 
-        if (teamPrefix.isEmpty()) {
-            return luckPermsPrefix;
-        }
-        if (luckPermsPrefix.isEmpty()) {
-            return teamPrefix;
-        }
+    public String mergePrefix(String teamPrefix, String luckPermsPrefix) {
+        teamPrefix = teamPrefix == null ? "" : teamPrefix;
+        luckPermsPrefix = luckPermsPrefix == null ? "" : luckPermsPrefix;
+
+        if (teamPrefix.isEmpty()) return luckPermsPrefix;
+        if (luckPermsPrefix.isEmpty()) return teamPrefix;
 
         return teamPrefix + " " + luckPermsPrefix;
     }
 
     public String mergeSuffix(String teamSuffix, String luckPermsSuffix) {
-        if (teamSuffix == null) teamSuffix = "";
-        if (luckPermsSuffix == null) luckPermsSuffix = "";
+        teamSuffix = teamSuffix == null ? "" : teamSuffix;
+        luckPermsSuffix = luckPermsSuffix == null ? "" : luckPermsSuffix;
 
-        if (teamSuffix.isEmpty()) {
-            return luckPermsSuffix;
-        }
-        if (luckPermsSuffix.isEmpty()) {
-            return teamSuffix;
-        }
+        if (teamSuffix.isEmpty()) return luckPermsSuffix;
+        if (luckPermsSuffix.isEmpty()) return teamSuffix;
 
         return luckPermsSuffix + " " + teamSuffix;
     }

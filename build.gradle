@@ -24,20 +24,19 @@ dependencies {
     compileOnly 'io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT'
     compileOnly 'net.luckperms:api:5.4'
 
-    implementation 'org.xerial:sqlite-jdbc:3.45.0.0'
+    // Paper už SQLite má → nebalit, nerelokovat
+    compileOnly 'org.xerial:sqlite-jdbc:3.45.0.0'
 }
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
-    options.release = 21
 }
 
 shadowJar {
     archiveClassifier.set('')
-    relocate 'org.sqlite', 'com.smughito.eventcorelib.libs.sqlite'
 }
 
-build {
+tasks.build {
     dependsOn shadowJar
 }
 
@@ -45,7 +44,7 @@ processResources {
     filteringCharset = 'UTF-8'
     filesMatching('plugin.yml') {
         expand(
-            'version': project.version
+                version: project.version
         )
     }
 }
