@@ -1,0 +1,8 @@
+name: EventCoreLib
+version: '${version}'
+main: dev.smughito.eventcorelib.EventCoreLib
+api-version: '1.21'
+authors: [ Smughito ]
+description: Team management library for event plugins
+website: https://github.com/Smughito/EventCoreLib
+softdepend: [ LuckPerms ]

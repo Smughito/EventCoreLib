@@ -1,0 +1,27 @@
+# EventCoreLib Configuration
+
+# Storage type: YAML or SQLITE
+storage-type: YAML
+
+# SQLite database file name (used if storage-type is SQLITE)
+sqlite-database: eventcorelib.db
+
+# Chat formatting
+chat:
+  enabled: true
+  # Format: {team_prefix}{luckperms_prefix}{player}{luckperms_suffix}{team_suffix}: {message}
+  format: "{team_prefix}{luckperms_prefix}{player}{luckperms_suffix} <dark_gray>»</dark_gray> {message}"
+
+# Tab list formatting
+tablist:
+  enabled: true
+  # Format: {team_prefix}{luckperms_prefix}{player}{luckperms_suffix}
+  format: "{team_prefix}{luckperms_prefix}{player}{luckperms_suffix}"
+
+# LuckPerms integration
+luckperms:
+  enabled: true
+  # Merge team prefix with LuckPerms prefix (team prefix appears before LuckPerms prefix)
+  merge-prefix: true
+  # Support RGB and gradient colors from LuckPerms
+  rgb-support: true

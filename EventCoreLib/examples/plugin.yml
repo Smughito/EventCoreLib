@@ -1,0 +1,12 @@
+name: ExamplePlugin
+version: 1.0.0
+main: dev.smughito.example.ExampleUsage
+api-version: '1.21'
+depend: [ EventCoreLib ]
+authors: [ Smughito ]
+description: Example plugin showing EventCoreLib usage
+
+commands:
+  team:
+    description: Team management command
+    usage: /<command> <join|leave|info|list>

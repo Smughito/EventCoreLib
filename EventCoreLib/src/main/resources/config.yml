@@ -1,0 +1,20 @@
+# EventCoreLib Configuration
+
+# Storage type: YAML or SQLITE
+storage:
+  type: YAML
+
+  # SQLite database file name (only used if type is SQLITE)
+  sqlite-filename: eventcorelib.db
+
+# Chat formatting
+chat:
+  enabled: true
+  # Format: <team_prefix><luckperms_prefix><player_name><luckperms_suffix><team_suffix>: <message>
+  format: "<team_prefix><luckperms_prefix><gray><player_name></gray><luckperms_suffix><team_suffix><white>: <message>"
+
+# Tab list formatting
+tablist:
+  enabled: true
+  # Format for player display name in tab list
+  format: "<team_prefix><luckperms_prefix><player_name><luckperms_suffix>"
