@@ -6,3 +6,11 @@ authors: [ Smughito ]
 description: Team management library for event plugins
 website: https://github.com/Smughito/EventCoreLib
 softdepend: [ LuckPerms ]
+commands:
+  team:
+    description: Správa týmů
+    usage: /team <create|remove|list>
+permissions:
+  eventcore.team:
+    description: Permise pro vytváření týmů
+    default: op

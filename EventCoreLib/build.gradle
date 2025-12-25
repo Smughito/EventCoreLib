@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'dev.smughito'
-version = '1.0.0'
+version = '1.0.1'
 
 repositories {
     mavenCentral()
@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT'
+    compileOnly 'io.papermc.paper:paper-api:1.21.10-R0.1-SNAPSHOT'
     compileOnly 'net.luckperms:api:5.4'
     implementation 'org.xerial:sqlite-jdbc:3.45.0.0'
 }

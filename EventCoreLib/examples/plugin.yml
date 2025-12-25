@@ -1,5 +1,5 @@
-name: ExamplePlugin
-version: 1.0.0
+name: EventCoreLib
+version: 1.0.1
 main: dev.smughito.example.ExampleUsage
 api-version: '1.21'
 depend: [ EventCoreLib ]

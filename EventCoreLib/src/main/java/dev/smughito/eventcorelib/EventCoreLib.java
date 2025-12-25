@@ -2,6 +2,7 @@ package dev.smughito.eventcorelib;
 
 import dev.smughito.eventcorelib.api.PlayerTeamService;
 import dev.smughito.eventcorelib.api.TeamManager;
+import dev.smughito.eventcorelib.commands.TeamCommand; // <- přidáno
 import dev.smughito.eventcorelib.core.PlayerTeamServiceImpl;
 import dev.smughito.eventcorelib.core.TeamManagerImpl;
 import dev.smughito.eventcorelib.integration.LuckPermsIntegration;
@@ -38,12 +39,15 @@ public class EventCoreLib extends JavaPlugin {
         chatFormatter = new ChatFormatter(luckPermsIntegration);
         chatFormatter.setEnabled(getConfig().getBoolean("chat.enabled", true));
         chatFormatter.setChatFormat(getConfig().getString("chat.format",
-            "<team_prefix><luckperms_prefix><gray><player_name></gray><luckperms_suffix><team_suffix><white>: <message>"));
+                "<team_prefix><luckperms_prefix><gray><player_name></gray><luckperms_suffix><team_suffix><white>: <message>"));
 
         tabListFormatter = new TabListFormatter(luckPermsIntegration);
         tabListFormatter.setEnabled(getConfig().getBoolean("tablist.enabled", true));
         tabListFormatter.setTabListFormat(getConfig().getString("tablist.format",
-            "<team_prefix><luckperms_prefix><player_name><luckperms_suffix>"));
+                "<team_prefix><luckperms_prefix><player_name><luckperms_suffix>"));
+
+        // Registrace příkazu /team
+        getCommand("team").setExecutor(new TeamCommand(teamManager));
 
         getLogger().info("EventCoreLib enabled successfully!");
         getLogger().info("Storage type: " + getConfig().getString("storage.type", "YAML"));

@@ -1,0 +1,10 @@
+name: EventCoreLib
+version: 1.0.0
+main: com.smughito.eventcorelib.EventCoreLib
+api-version: '1.21'
+author: Smughito
+description: Team management library for Minecraft event plugins
+website: https://github.com/Smughito/EventCoreLib
+
+softdepend:
+  - LuckPerms
